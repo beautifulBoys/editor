@@ -357,7 +357,7 @@ export default {
             color: #eee;
             font-size: @font-size;
             line-height: 20px;
-            font-family: Consolas;
+            font-family: Roboto Mono, Consolas;
             overflow: auto;
             word-break: break-all;
             box-sizing: border-box;
@@ -416,6 +416,6 @@ html, body {
   margin: 0;
   font-size: 0;
   background: @color-background;
-  font-family: Consolas, 'Microsoft YaHei';
+  font-family: 'Microsoft YaHei';
 }
 </style>
