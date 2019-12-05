@@ -13,3 +13,14 @@ ipcMain.on('open-directory-dialog-event', (event, p) => {
     }
   })
 })
+
+ipcMain.on('open-file-dialog-event', (event, p) => {
+  dialog.showOpenDialog({properties: [p]}, files => {
+    if (files) {// 如果有选中
+      // 发送选择的对象给子进程
+      event.sender.send('open-file-dialog-resolve-event', files[0])
+    } else {
+      event.sender.send('open-file-dialog-reject-event')
+    }
+  })
+})
