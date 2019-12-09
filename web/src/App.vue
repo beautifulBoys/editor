@@ -28,25 +28,14 @@
         </div>
         <div class="file-box">
           <div class="file-title">资源管理器</div>
-          <div class="block-title">
-            <i class="iconfont">&#xeb80;</i> 打开的编辑器
-          </div>
-          <div class="block-content"></div>
-          <div class="block-title">
-            <i class="iconfont">&#xeb80;</i> WEB
-          </div>
-          <div class="block-content web">
-            <div class="line" v-for="(item, index) in fileList" :key="index">
-              <i :class="['iconfont', {none: item.type !== 'folder'}]">&#xeb80;</i>
-              <i class="iconfont icon" v-if="item.type === 'folder'">&#xead2;</i>
-              <i class="iconfont icon" v-else>&#xeacf;</i>
-              <span>{{item.fullName || item.name}}</span>
+          <div v-for="(item, index) in source.list" :key="index" class="source-area">
+            <div class="block-title">
+              <i class="iconfont">&#xeb80;</i> {{item.text}}
+            </div>
+            <div class="block-content" v-show="source.index === item.id">
+              <folder-list-comp :childrens="fileList" v-if="source.index === item.id"></folder-list-comp>
             </div>
           </div>
-          <div class="block-title">
-            <i class="iconfont">&#xeb80;</i> 大纲
-          </div>
-          <div class="block-content"></div>
         </div>
       </div>
       <div class="right">
@@ -59,7 +48,7 @@
             </div>
           </div>
           <div class="content">
-            <textarea v-model="codeMirror.value" class="textarea"></textarea>
+            <textarea class="textarea"></textarea>
           </div>
         </div>
       </div>
@@ -81,14 +70,19 @@
 </template>
 
 <script>
-import fileList from '@/json/files.js'
-import { codemirror } from 'vue-codemirror'
-import 'codemirror/lib/codemirror.css'
+import Vue from 'vue'
+import folderComponent from '@/components/folder'
+import folderListComponent from '@/components/folder-list'
+import fileList from './fold-data'
 // import 'codemirror/theme/monokai.css'
+
+Vue.component('folder-comp', folderComponent)
+
+Vue.component('folder-list-comp', folderListComponent)
+
 export default {
   name: 'App',
   components: {
-    'code-mirror': codemirror
   },
   data () {
     return {
@@ -119,32 +113,17 @@ export default {
           {id: 6, text: '管理', icon: '&#xeb44;'}
         ]
       },
-      codeMirror: {
-        value: `mounted () {
-  document.onkeydown = function (e) {
-    e = e || window.event
-    if (e.altKey && e.keyCode === 70) console.log('----------')
-  }
-}`,
-        options: {
-          tabSize: 4,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          foldGutter: true,
-          styleSelectedText: true,
-          mode: 'text/javascript',
-          // keyMap: "sublime",
-          matchBrackets: true,
-          showCursorWhenSelecting: true,
-          theme: "monokai",
-          extraKeys: { "Ctrl": "autocomplete" },
-          hintOptions:{
-            completeSingle: false,
-            watch: 15
-          }
-        }
-      }
+      source: {
+        list: [
+          {id: 0, text: '打开的编辑器'},
+          {id: 1, text: 'WEB', content: '<folder-list-comp :childrens="fileList"></folder-list-comp>'},
+          {id: 2, text: '大纲'}
+        ],
+        index: 1
+      },
+      areaList: [
+        {}
+      ]
     }
   },
   mounted () {
@@ -252,6 +231,10 @@ export default {
         flex: 1;
         display: flex;
         flex-flow: column;
+        .source-area {
+          flex: 1;
+          width: 100%;
+        }
         .file-title {
           line-height: 30px;
           color: @color-text;
@@ -269,26 +252,8 @@ export default {
           cursor: pointer;
         }
         .block-content {
-          &.web {
-            flex: 1;
-          }
-          .line {
-            line-height: 25px;
-            color: #ccc;
-            font-size: @font-size;
-            padding: 0 10px;
-            cursor: pointer;
-            &:hover {
-              background: fade(@color-btn-hover-background, 50);
-            }
-            .icon {
-              font-size: 16px;
-              vertical-align: middle;
-            }
-            .iconfont.none {
-              opacity: 0;
-            }
-          }
+          width: 100%;
+          overflow-y: scroll;
         }
       }
     }

@@ -5,41 +5,7 @@ import electron from 'electron'
 const { ipcRenderer, remote } = electron
 const { ipcMain, dialog, shell } = remote
 
-export const readDirList = (filePath, step = 1) => {
-  let arr = []
-  let files = fs.readdirSync(filePath)
-  files.forEach(filename => {
-    let info = null
-    let fullPath = path.join(filePath, filename)
-    let stats = fs.statSync(fullPath)
-    if (stats.isFile()) {
-      info = {
-        type: 'file',
-        step,
-        ext: filename.replace(/.*\./g, ''),
-        name: filename.replace(/\.[^\.]*$/g, ''),
-        fullName: filename,
-        size: stats.size,
-        path: fullPath
-      }
-    } else if (stats.isDirectory()) {
-      info = {
-        type: 'dir',
-        step,
-        name: filename,
-        path: filePath,
-        childrens: readDirList(fullPath, step + 1)
-      }
-    } else {
-      info = {
-        type: 'other'
-      }
-    }
-    arr.push(info)
-  })
-  return arr
-}
-
+// 打开选择文件夹弹窗
 export const selectDir = () => {
   return new Promise((resolve, reject) => {
     ipcRenderer.send('open-directory-dialog-event','openDirectory')
@@ -52,6 +18,7 @@ export const selectDir = () => {
   })
 }
 
+// 读取文件内容
 export const readFileContent = (filePath) => {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf-8', (err, data) => {
@@ -64,6 +31,7 @@ export const readFileContent = (filePath) => {
   })
 }
 
+// 打开选择文件弹窗
 export const selectFile = () => {
   return new Promise((resolve, reject) => {
     ipcRenderer.send('open-file-dialog-event','openFile')
@@ -76,6 +44,7 @@ export const selectFile = () => {
   })
 }
 
+// 选择并读取文件内容
 export const selectAndReadFileContent = () => {
   return new Promise((resolve, reject) => {
     ipcRenderer.send('open-file-dialog-event','openFile')
@@ -91,3 +60,57 @@ export const selectAndReadFileContent = () => {
     })
   })
 }
+
+// 写入文件内容
+export const writeFile = (path, content) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path, content, 'utf8', err => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
+// 追加文件内容
+export const appendFile = (path, content) => {
+  return new Promise((resolve, reject) => {
+    fs.appendFile(path, content, err => {
+      if (err) {
+          reject(err)
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
+// 文件和目录改名
+export const rename = (oldPath, newPath) => {
+  return new Promise((resolve, reject) => {
+    fs.rename(oldPath, newPath, err => {
+      if (err) {
+          reject(err)
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
+// 文件和目录改名
+export const rmFile = (path) => {
+  return new Promise((resolve, reject) => {
+    fs.unlink(path, err => {
+      if (err) {
+          reject(err)
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
+
