@@ -1,43 +1,8 @@
 <template>
-  <div id="app">
-    <div class="layout-header">
-      <div class="menu-box">
-        <div class="logo"><i class="iconfont">&#xe6a2;</i></div>
-        <div class="menu-item" v-for="(item, index) in menu.list" :key="index">{{item.text}}</div>
-      </div>
-      <div class="title-box">app.vue - Visual Studio Code</div>
-      <div class="control-box">
-        <div class="menu-item"><i class="iconfont">&#xeb36;</i></div>
-        <div class="menu-item"><i class="iconfont">&#xeb05;</i></div>
-        <div class="menu-item error"><i class="iconfont">&#xeb2c;</i></div>
-      </div>
-    </div>
+  <div id="app" :style="{width: windowInfo.innerWidth + 'px', height: windowInfo.innerHeight + 'px'}">
+    <header-component></header-component>
     <div class="layout-body">
-      <div class="left">
-        <div class="side-bar">
-          <div class="top">
-            <div :class="['item', {active: item.id === sidebar.topId}]" v-for="(item, index) in sidebar.top" :key="index">
-              <i class="iconfont" v-html="item.icon"></i>
-            </div>
-          </div>
-          <div class="bottom">
-            <div class="item" v-for="(item, index) in sidebar.bottom" :key="index">
-              <i class="iconfont" v-html="item.icon"></i>
-            </div>
-          </div>
-        </div>
-        <div class="file-box">
-          <div class="file-title">资源管理器</div>
-          <div v-for="(item, index) in source.list" :key="index" class="source-area">
-            <div class="block-title">
-              <i class="iconfont">&#xeb80;</i> {{item.text}}
-            </div>
-            <div class="block-content" v-show="source.index === item.id">
-              <folder-list-comp :childrens="fileList" v-if="source.index === item.id"></folder-list-comp>
-            </div>
-          </div>
-        </div>
-      </div>
+      <sidebar-component></sidebar-component>
       <div class="right">
         <div class="area">
           <div class="header">
@@ -53,27 +18,18 @@
         </div>
       </div>
     </div>
-    <div class="layout-footer">
-      <div class="btn">
-        <i class="iconfont refresh">&#xeb35;</i>
-      </div>
-      <div class="btn">
-        <i class="iconfont refresh">&#xeb2d;</i>
-        <span class="text">12</span>
-        <i class="iconfont refresh">&#xeb22;</i>
-        <span class="text">1245</span>
-      </div>
-      <span class="text fr">空格: 2</span> 
-      <span class="text fr">行: 66，列: 345</span>
-    </div>
+    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import { mapActions, mapState, mapMutations } from 'vuex'
+import headerComponent from '@/layout/header'
+import footerComponent from '@/layout/footer'
+import sidebarComponent from '@/layout/sidebar'
 import folderComponent from '@/components/folder'
 import folderListComponent from '@/components/folder-list'
-import fileList from './fold-data'
 // import 'codemirror/theme/monokai.css'
 
 Vue.component('folder-comp', folderComponent)
@@ -83,180 +39,52 @@ Vue.component('folder-list-comp', folderListComponent)
 export default {
   name: 'App',
   components: {
+    'header-component': headerComponent,
+    'footer-component': footerComponent,
+    'sidebar-component': sidebarComponent
   },
   data () {
     return {
-      menu: {
-        id: 1,
-        list: [
-          {id: 1, text: '文件(F)', cmd: ['Alt', 'F']},
-          {id: 2, text: '编辑(E)', cmd: ['Alt', 'E']},
-          {id: 3, text: '选择(S)', cmd: ['Alt', 'S']},
-          {id: 4, text: '查看(V)', cmd: ['Alt', 'V']},
-          {id: 5, text: '转到(G)', cmd: ['Alt', 'G']},
-          {id: 6, text: '调试(D)', cmd: ['Alt', 'D']},
-          {id: 7, text: '终端(T)', cmd: ['Alt', 'T']},
-          {id: 8, text: '帮助(H)', cmd: ['Alt', 'H']}
-        ]
-      },
-      fileList: fileList,
-      sidebar: {
-        topId: 1,
-        top: [
-          {id: 1, text: '资源管理器', icon: '&#xebbc;'},
-          {id: 2, text: '搜索', icon: '&#xeb4b;'},
-          {id: 3, text: '源代码管理器', icon: '&#xe632;'},
-          {id: 4, text: '调试', icon: '&#xeb0c;'},
-          {id: 5, text: '拓展', icon: '&#xebbf;'}
-        ],
-        bottom: [
-          {id: 6, text: '管理', icon: '&#xeb44;'}
-        ]
-      },
-      source: {
-        list: [
-          {id: 0, text: '打开的编辑器'},
-          {id: 1, text: 'WEB', content: '<folder-list-comp :childrens="fileList"></folder-list-comp>'},
-          {id: 2, text: '大纲'}
-        ],
-        index: 1
-      },
       areaList: [
         {}
       ]
     }
   },
+  computed: mapState({
+    windowInfo: state => state.windowInfo
+  }),
   mounted () {
     document.onkeydown = function (e) {
       e = e || window.event
       if (e.altKey && e.keyCode === 70) console.log('----------')
+    }
+    this.initWindow()
+    this.$store.commit('initWindowSize')
+  },
+  methods: {
+    initWindow () {
+      window.onresize = (e) => {
+        this.$store.commit('initWindowSize')
+        // this.source.listMap.web.height = window.innerHeight - 30 - 32 - 25 - 20
+      }
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import "~@/style/const.less";
+@import "~@/style/func.less";
+
 #app {
   width: 100%;
   height: 100%;
   display: flex;
   flex-flow: column;
   background: @color-background;
-  .layout-header {
-    width: 100%;
-    line-height: 30px;
-    height: 30px;
-    display: flex;
-    user-select: none;
-    .menu-item {
-      color: @color-text;
-      padding: 0 10px;
-      font-size: @font-size;
-      display: inline-block;
-      cursor: default;
-      text-align: center;
-      &.error {
-        &:hover {
-          background: @color-btn-hover-error-background;
-          color: #fff;
-        }
-      }
-      &:hover {
-        background: @color-btn-hover-background;
-      }
-    }
-    .menu-box {
-      flex-shrink: 1;
-      .logo {
-        padding: 0 10px;
-        display: inline-block;
-        cursor: default;
-        text-align: center;
-        line-height: 30px;
-        vertical-align: top;
-        height: 30px;
-        i {
-          color: #1296db;
-          font-size: 18px;
-        }
-      }
-    }
-    .title-box {
-      font-size: @font-size;
-      color: @color-text;
-      display: inline-block;
-      padding: 0 10px;
-      flex: 1;
-      text-align: center;
-    }
-    .control-box {
-      .menu-item {
-        width: 25px;
-      }
-    }
-  }
   .layout-body {
     width: 100%;
     flex: 1;
     display: flex;
-    .left {
-      width: 300px;
-      display: flex;
-      .side-bar {
-        width: 50px;
-        height: 100%;
-        background: @color-btn-hover-background;
-        display: flex;
-        flex-flow: column;
-        .item {
-          width: 100%;
-          text-align: center;
-          line-height: 50px;
-          color: @color-text;
-          cursor: pointer;
-          .iconfont {
-            font-size: 30px;
-            vertical-align: middle;
-          }
-          &.active, &:hover {
-            color: #ccc;
-          }
-        }
-        .top {
-          flex: 1;
-        }
-      }
-      .file-box {
-        flex: 1;
-        display: flex;
-        flex-flow: column;
-        .source-area {
-          flex: 1;
-          width: 100%;
-        }
-        .file-title {
-          line-height: 30px;
-          color: @color-text;
-          font-size: @font-size;
-          padding: 0 10px;
-          cursor: default;
-          border: 1px solid @color-background;
-        }
-        .block-title {
-          line-height: 25px;
-          color: #ccc;
-          font-size: @font-size;
-          background: @color-btn-hover-background;
-          padding: 0 10px;
-          cursor: pointer;
-        }
-        .block-content {
-          width: 100%;
-          overflow-y: scroll;
-        }
-      }
-    }
     .right {
       flex: 1;
       .area {
@@ -329,44 +157,6 @@ export default {
             padding: 0 0 0 50px;
           }
         }
-      }
-    }
-  }
-  .layout-footer {
-    width: 100%;
-    line-height: 20px;
-    height: 20px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    user-select: none;
-    overflow: hidden;
-    .iconfont {
-      line-height: 20px;
-      font-size: 16px;
-      display: inline-block;
-      text-align: center;
-      vertical-align: middle;
-    }
-    .text {
-      display: inline-block;
-      margin-right: 5px;
-      font-size: @font-size;
-      line-height: 20px;
-      color: #888;
-      &.fr {
-        float: right;
-      }
-    }
-    .btn {
-      cursor: pointer;
-      display: inline-block;
-      margin: 0 2px;
-      font-size: @font-size;
-      line-height: 20px;
-      color: #888;
-      padding: 0 7px;
-      &:hover {
-        background: rgba(255, 255, 255, 0.1);
       }
     }
   }
