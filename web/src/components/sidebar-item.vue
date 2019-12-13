@@ -1,14 +1,15 @@
 <template>
-  <div :class="['line', {hover: mouseoverStatus}]"
-    @click="foldEvent" 
-    @mouseover="mouseEvent($event, true)" @mouseout="mouseEvent($event, false)"
+  <div
+    :class="['line', {hover: mouseoverStatus}]"
+    @click="foldEvent"
+    file-list-line="1"
   >
-    <i class="step" :style="{width: item.step * tabSize + 'px'}" tag="缩进"></i>
-    <i :class="['iconfont', {none: item.type !== 'dir', fold: foldStatus}]" tag="折叠图标">&#xeb80;</i>
-    <i class="iconfont icon" v-if="item.type === 'dir'" tag="目录图标">&#xead2;</i>
-    <i class="iconfont icon" v-else tag="文件图标">&#xeacf;</i>
-    <span v-if="item.type === 'file'">{{item.fullName}}</span>
-    <span v-if="item.type === 'dir'">{{item.name}}</span>
+    <i file-list-line="2" class="step" :style="{width: item.step * tabSize + 'px'}" tag="缩进"></i>
+    <i file-list-line="2" :class="['iconfont', {none: item.type !== 'dir', fold: foldStatus}]" tag="折叠图标">&#xeb80;</i>
+    <i file-list-line="2" class="iconfont icon" v-if="item.type === 'dir'" tag="目录图标">&#xead2;</i>
+    <i file-list-line="2" class="iconfont icon" v-else tag="文件图标">&#xeacf;</i>
+    <span file-list-line="2" v-if="item.type === 'file'">{{item.fullName}}</span>
+    <span file-list-line="2" v-if="item.type === 'dir'">{{item.name}}</span>
     <folder-list-comp :childrens="item.childrens" :foldStatus="foldStatus"></folder-list-comp>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{width: windowInfo.innerWidth + 'px', height: windowInfo.innerHeight + 'px'}">
+  <div id="app">
     <header-component></header-component>
     <div class="layout-body">
       <sidebar-component></sidebar-component>
@@ -28,13 +28,13 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import headerComponent from '@/layout/header'
 import footerComponent from '@/layout/footer'
 import sidebarComponent from '@/layout/sidebar'
-import folderComponent from '@/components/folder'
-import folderListComponent from '@/components/folder-list'
+import sidebarItemComponent from '@/components/sidebar-item'
+import sidebarListComponent from '@/components/sidebar-list'
 // import 'codemirror/theme/monokai.css'
 
-Vue.component('folder-comp', folderComponent)
+Vue.component('folder-comp', sidebarItemComponent)
 
-Vue.component('folder-list-comp', folderListComponent)
+Vue.component('folder-list-comp', sidebarListComponent)
 
 export default {
   name: 'App',
