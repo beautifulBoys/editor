@@ -33,7 +33,6 @@ import sidebarListComponent from '@/components/sidebar-list'
 // import 'codemirror/theme/monokai.css'
 
 Vue.component('folder-comp', sidebarItemComponent)
-
 Vue.component('folder-list-comp', sidebarListComponent)
 
 export default {
@@ -65,7 +64,6 @@ export default {
     initWindow () {
       window.onresize = (e) => {
         this.$store.commit('initWindowSize')
-        // this.source.listMap.web.height = window.innerHeight - 30 - 32 - 25 - 20
       }
     }
   }
