@@ -34,7 +34,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import "~@/style/const.less";
 .layout-footer {
   width: 100%;

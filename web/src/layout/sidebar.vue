@@ -22,8 +22,7 @@
           class="block-content" 
           :style="{height: windowInfo.sidebarContentHeight + 'px'}"
           @mouseover="mouseEvent($event, true)"
-          @mouseout="mouseEvent($event, false)"
-        >
+          @mouseout="mouseEvent($event, false)">
           <folder-list-comp :childrens="sidebar.fileList" :foldStatus="true"></folder-list-comp>
         </div>
       </div>
@@ -60,7 +59,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import "~@/style/func.less";
 .sidebar-layout {
   height: 100%;

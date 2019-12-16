@@ -3,7 +3,7 @@
     <header-component></header-component>
     <div class="layout-body">
       <sidebar-component></sidebar-component>
-      <div class="right">
+      <div class="layout-content">
         <div class="area">
           <div class="header">
             <div :class="['item', {active: index === 1}]" v-for="(item, index) in 4" :key="index">
@@ -13,7 +13,8 @@
             </div>
           </div>
           <div class="content">
-            <textarea class="textarea"></textarea>
+            <!-- <textarea class="textarea"></textarea> -->
+            <code-mirror v-model="code" :options="cmOption"></code-mirror>
           </div>
         </div>
       </div>
@@ -30,7 +31,16 @@ import footerComponent from '@/layout/footer'
 import sidebarComponent from '@/layout/sidebar'
 import sidebarItemComponent from '@/components/sidebar-item'
 import sidebarListComponent from '@/components/sidebar-list'
-// import 'codemirror/theme/monokai.css'
+
+import { codemirror } from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+
+// theme
+import 'codemirror/theme/base16-dark.css'
+// language
+import 'codemirror/mode/vue/vue.js'
+// keyMaps
+import 'codemirror/keymap/sublime.js'
 
 Vue.component('folder-comp', sidebarItemComponent)
 Vue.component('folder-list-comp', sidebarListComponent)
@@ -40,13 +50,45 @@ export default {
   components: {
     'header-component': headerComponent,
     'footer-component': footerComponent,
-    'sidebar-component': sidebarComponent
+    'sidebar-component': sidebarComponent,
+    'code-mirror': codemirror
   },
   data () {
     return {
       areaList: [
         {}
-      ]
+      ],
+      code: `<template>
+  <h1>Hello World!</h1>
+  <br/>
+  <br/>
+  <codemirror v-model="code" :options="cmOption"></codemirror>
+</template>
+<style lang="scss">
+  @import './sass/mixins';
+  @import './sass/variables';
+  main {
+    position: relative;
+  }
+</style>`,
+      cmOption: {
+        tabSize: 2,
+        foldGutter: true,
+        styleActiveLine: true,
+        lineNumbers: true,
+        line: true,
+        mode: 'text/x-vue',
+        keyMap: 'sublime',
+        theme: 'base16-dark',
+        extraKeys: {
+          'F11'(cm) {
+            cm.setOption('fullScreen', !cm.getOption('fullScreen'))
+          },
+          'Esc'(cm) {
+            if (cm.getOption('fullScreen')) cm.setOption('fullScreen', false)
+          }
+        }
+      }
     }
   },
   computed: mapState({
@@ -70,9 +112,18 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import "~@/style/func.less";
 
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  background: @color-background;
+  font-family: "Microsoft YaHei";
+}
 #app {
   width: 100%;
   height: 100%;
@@ -83,7 +134,7 @@ export default {
     width: 100%;
     flex: 1;
     display: flex;
-    .right {
+    .layout-content {
       flex: 1;
       .area {
         width: 100%;
@@ -138,37 +189,17 @@ export default {
           flex: 1;
           width: 100%;
           background: @color-content-background;
-          .textarea {
-            width: 100%;
-            height: 100%;
-            resize: none;
-            background: rgba(0, 0, 0, 0);
-            outline: none;
-            border: none;
-            color: #eee;
-            font-size: @font-size;
-            line-height: 20px;
+          .CodeMirror {
+            border:1px solid black;
+            font-size:15px;
             font-family: Roboto Mono, Consolas;
-            overflow: auto;
-            word-break: break-all;
-            box-sizing: border-box;
-            padding: 0 0 0 50px;
+            font-size: @font-size + 1px;
+            .scroll;
+            overflow-y: scroll;
           }
         }
       }
     }
   }
-}
-</style>
-<style lang="less">
-@import "~@/style/const.less";
-html, body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-size: 0;
-  background: @color-background;
-  font-family: 'Microsoft YaHei';
 }
 </style>
