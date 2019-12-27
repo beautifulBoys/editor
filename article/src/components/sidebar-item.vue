@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['line', {hover: mouseoverStatus}]"
+    :class="['sidebar-item-line', {hover: mouseoverStatus}]"
     @click="foldEvent"
     file-list-line="1"
   >
@@ -41,38 +41,3 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
-@import "~@/style/const.less";
-.line {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  user-select: none;
-  
-  line-height: 25px;
-  color: #ccc;
-  font-size: @font-size;
-  cursor: pointer;
-  &.hover, &.selected {
-    background: #333842;
-  }
-  .step {
-    display: inline-block;
-  }
-  .iconfont {
-    display: inline-block;
-    &.fold {
-      transform: rotate(90deg);
-    }
-    &.icon {
-      font-size: 16px;
-      vertical-align: middle;
-    }
-    &.none {
-      opacity: 0;
-    }
-  }
-}
-</style>
