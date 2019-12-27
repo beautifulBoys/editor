@@ -29,19 +29,8 @@ import headerComponent from '@/layout/header'
 import footerComponent from '@/layout/footer'
 import sidebarComponent from '@/layout/sidebar'
 
-import { codemirror } from 'vue-codemirror'
-
 import sidebarItemComponent from '@/components/sidebar-item'
 import sidebarListComponent from '@/components/sidebar-list'
-
-import 'codemirror/lib/codemirror.css'
-
-// theme
-import 'codemirror/theme/base16-dark.css'
-// language
-import 'codemirror/mode/vue/vue.js'
-// keyMaps
-import 'codemirror/keymap/sublime.js'
 
 Vue.component('sidebar-item-comp', sidebarItemComponent)
 Vue.component('sidebar-list-comp', sidebarListComponent)
@@ -50,27 +39,14 @@ export default {
   components: {
     'header-component': headerComponent,
     'footer-component': footerComponent,
-    'sidebar-component': sidebarComponent,
-    'code-mirror': codemirror
+    'sidebar-component': sidebarComponent
   },
   data () {
     return {
       areaList: [
         {}
       ],
-      code: `<template>
-  <h1>Hello World!</h1>
-  <br/>
-  <br/>
-  <codemirror v-model="code" :options="cmOption"></codemirror>
-</template>
-<style lang="scss">
-  @import './sass/mixins';
-  @import './sass/variables';
-  main {
-    position: relative;
-  }
-</style>`,
+      code: ``,
       cmOption: {
         tabSize: 2,
         foldGutter: true,

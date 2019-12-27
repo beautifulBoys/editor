@@ -123,3 +123,238 @@ html, body {
     }
   }
 }
+
+
+.layout-header {
+  width: 100%;
+  line-height: 30px;
+  height: 30px;
+  display: flex;
+  user-select: none;
+  .menu-item {
+    color: @color-text;
+    padding: 0 10px;
+    font-size: @font-size;
+    display: inline-block;
+    cursor: default;
+    text-align: center;
+    position: relative;
+    &.error {
+      &:hover {
+        background: @color-btn-hover-error-background;
+        color: #fff;
+      }
+    }
+    &:hover {
+      background: @color-btn-hover-background;
+      .ul {
+        display: block;
+      }
+    }
+    .ul {
+      padding: 0;
+      margin: 0;
+      z-index: 100;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 200px;
+      box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+      display: none;
+      .li {
+        line-height: 30px;
+        font-size: @font-size;
+        list-style-type: none;
+        background: @color-btn-hover-background;
+        padding: 0 15px;
+        margin: 0;
+        text-align: left;
+        color: @color-text + #444;
+
+        &:hover {
+          background: @color-content-background;
+        }
+      }
+    }
+  }
+  .menu-box {
+    flex-shrink: 1;
+    .logo {
+      padding: 0 10px;
+      display: inline-block;
+      cursor: default;
+      text-align: center;
+      line-height: 30px;
+      vertical-align: top;
+      height: 30px;
+      i {
+        color: #1296db;
+        font-size: 18px;
+      }
+    }
+  }
+  .title-box {
+    font-size: @font-size;
+    color: @color-text;
+    display: inline-block;
+    padding: 0 10px;
+    flex: 1;
+    text-align: center;
+  }
+  .control-box {
+    .menu-item {
+      width: 25px;
+    }
+  }
+}
+
+
+.sidebar-layout {
+  height: 100%;
+  display: flex;
+  .side-bar {
+    width: 50px;
+    background: @color-btn-hover-background;
+    display: flex;
+    flex-flow: column;
+    .item {
+      width: 100%;
+      text-align: center;
+      line-height: 50px;
+      color: @color-text;
+      cursor: pointer;
+      .iconfont {
+        font-size: 30px;
+        vertical-align: middle;
+      }
+      &.active, &:hover {
+        color: #ccc;
+      }
+    }
+    .top {
+      flex: 1;
+    }
+  }
+  .file-box {
+    width: 250px;
+    .source-area {
+      width: 100%;
+    }
+    .file-title {
+      line-height: 30px;
+      color: @color-text;
+      font-size: @font-size;
+      padding: 0 10px;
+      cursor: default;
+      border: 1px solid @color-background;
+    }
+    .block-title {
+      line-height: 25px;
+      color: #ccc;
+      font-size: @font-size;
+      background: @color-btn-hover-background;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+    .block-content {
+      width: 100%;
+      overflow-y: auto;
+      .scroll;
+    }
+  }
+}
+
+
+.layout-footer {
+  width: 100%;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  user-select: none;
+  overflow: hidden;
+  .iconfont {
+    line-height: 20px;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .text {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: @font-size;
+    line-height: 20px;
+    color: #888;
+    &.fr {
+      float: right;
+    }
+  }
+  .btn {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 2px;
+    font-size: @font-size;
+    line-height: 20px;
+    color: #888;
+    padding: 0 7px;
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+
+.layout-header {
+  width: 100%;
+  line-height: 30px;
+  height: 30px;
+  display: flex;
+  user-select: none;
+  .menu-item {
+    color: @color-text;
+    padding: 0 10px;
+    font-size: @font-size;
+    display: inline-block;
+    cursor: default;
+    text-align: center;
+    &.error {
+      &:hover {
+        background: @color-btn-hover-error-background;
+        color: #fff;
+      }
+    }
+    &:hover {
+      background: @color-btn-hover-background;
+    }
+  }
+  .menu-box {
+    flex-shrink: 1;
+    .logo {
+      padding: 0 10px;
+      display: inline-block;
+      cursor: default;
+      text-align: center;
+      line-height: 30px;
+      vertical-align: top;
+      height: 30px;
+      i {
+        color: #1296db;
+        font-size: 18px;
+      }
+    }
+  }
+  .title-box {
+    font-size: @font-size;
+    color: @color-text;
+    display: inline-block;
+    padding: 0 10px;
+    flex: 1;
+    text-align: center;
+  }
+  .control-box {
+    .menu-item {
+      width: 25px;
+    }
+  }
+}
