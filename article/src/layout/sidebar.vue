@@ -13,18 +13,13 @@
       </div>
     </div>
     <div class="file-box">
-      <div class="file-title">资源管理</div>
-      <div v-for="(item, key) in sidebar.source.listMap" :key="key" class="source-area">
-        <div class="block-title">
-          <i class="iconfont">&#xeb80;</i> {{item.text}}
-        </div>
-        <div
-          class="block-content" 
-          :style="{height: windowInfo.sidebarContentHeight + 'px'}"
-          @mouseover="mouseEvent($event, true)"
-          @mouseout="mouseEvent($event, false)">
-          <sidebar-list-comp :childrens="sidebar.fileList" :foldStatus="true"></sidebar-list-comp>
-        </div>
+      <div class="file-title">工作目录</div>
+      <div
+        class="block-content" 
+        :style="{height: windowInfo.sidebarContentHeight + 'px'}"
+        @mouseover="mouseEvent($event, true)"
+        @mouseout="mouseEvent($event, false)">
+        <sidebar-list-comp :childrens="sidebar.fileList" :foldStatus="true"></sidebar-list-comp>
       </div>
     </div>
   </div>

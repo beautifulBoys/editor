@@ -7,8 +7,7 @@
         <div class="area">
           <div class="header">
             <div :class="['item', {active: index === 1}]" v-for="(item, index) in 4" :key="index">
-              <i class="iconfont">&#xeacf;</i>
-              <span class="text">App-list-asdfjasdfjasdfj.vue</span>
+              <span class="text">第八章、日出</span>
               <i class="iconfont close">&#xeb2c;</i>
             </div>
           </div>

@@ -21,33 +21,8 @@ const store = new Vuex.Store({
             cmd: ['Alt', 'F'],
             list: [
               {
-                id: 11,
-                text: '新建文件',
-                cmd: ['Ctrl', 'N']
-              },
-              {
-                id: 12,
-                text: '新建窗口',
-                cmd: ['Ctrl', 'N']
-              },
-              {
-                id: 13,
-                text: '打开文件',
-                cmd: ['Ctrl', 'N']
-              },
-              {
                 id: 14,
                 text: '打开文件夹',
-                cmd: ['Ctrl', 'N']
-              },
-              {
-                id: 15,
-                text: '保存',
-                cmd: ['Ctrl', 'N']
-              },
-              {
-                id: 16,
-                text: '另存为',
                 cmd: ['Ctrl', 'N']
               }
             ]
@@ -60,57 +35,6 @@ const store = new Vuex.Store({
               {
                 id: 21,
                 text: '剪切',
-                cmd: []
-              },
-              {
-                id: 22,
-                text: '复制',
-                cmd: []
-              },
-              {
-                id: 23,
-                text: '粘贴',
-                cmd: []
-              }
-            ]
-          },
-          {
-            id: 3,
-            text: '查看(V)',
-            cmd: ['Alt', 'V'],
-            list: [
-              {
-                id: 31,
-                text: '搜索',
-                cmd: []
-              }
-            ]
-          },
-          {
-            id: 4,
-            text: '调试(D)',
-            cmd: ['Alt', 'D'],
-            list: [
-              {
-                id: 41,
-                text: '启动调试',
-                cmd: []
-              }
-            ]
-          },
-          {
-            id: 5,
-            text: '帮助(H)',
-            cmd: ['Alt', 'H'],
-            list: [
-              {
-                id: 51,
-                text: '开发者工具',
-                cmd: []
-              },
-              {
-                id: 52,
-                text: '关于',
                 cmd: []
               }
             ]
