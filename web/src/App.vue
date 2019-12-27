@@ -42,8 +42,8 @@ import 'codemirror/mode/vue/vue.js'
 // keyMaps
 import 'codemirror/keymap/sublime.js'
 
-Vue.component('folder-comp', sidebarItemComponent)
-Vue.component('folder-list-comp', sidebarListComponent)
+Vue.component('sidebar-item-comp', sidebarItemComponent)
+Vue.component('sidebar-list-comp', sidebarListComponent)
 
 export default {
   name: 'App',

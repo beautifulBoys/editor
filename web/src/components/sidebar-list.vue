@@ -1,7 +1,7 @@
 <template>
   <div class="children" v-show="foldStatus">
     <template v-for="(item, index) in childrens">
-      <folder-comp :item="item" :key="index"></folder-comp>
+      <sidebar-item-comp :item="item" :key="index"></sidebar-item-comp>
     </template>
   </div>
 </template>

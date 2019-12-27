@@ -23,7 +23,7 @@
           :style="{height: windowInfo.sidebarContentHeight + 'px'}"
           @mouseover="mouseEvent($event, true)"
           @mouseout="mouseEvent($event, false)">
-          <folder-list-comp :childrens="sidebar.fileList" :foldStatus="true"></folder-list-comp>
+          <sidebar-list-comp :childrens="sidebar.fileList" :foldStatus="true"></sidebar-list-comp>
         </div>
       </div>
     </div>
