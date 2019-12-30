@@ -9,7 +9,8 @@ const store = new Vuex.Store({
     windowInfo: {
       innerHeight: 0,
       innerWidth: 0,
-      sidebarContentHeight: 0
+      sidebarContentHeight: 0,
+      contentHeight: 0
     },
     header: {
       fileTitle: '',
@@ -71,6 +72,7 @@ const store = new Vuex.Store({
       state.windowInfo.innerHeight = window.innerHeight
       state.windowInfo.innerWidth = window.innerWidth
       state.windowInfo.sidebarContentHeight = window.innerHeight - 107
+      state.windowInfo.contentHeight = window.innerHeight - 110
     },
     createPage (state, info) {
       info = ''

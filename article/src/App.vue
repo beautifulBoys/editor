@@ -11,7 +11,7 @@
               <i class="iconfont">&#xeb2c;</i>
             </div>
           </div>
-          <div class="content">
+          <div class="content" :style="{height: windowInfo.contentHeight + 'px'}">
             <baidu-editor v-model="item.editValue" :config="ueConfig" class="text-area-box"></baidu-editor>
           </div>
         </div>
@@ -58,6 +58,11 @@ export default {
     return {
       ueConfig: BaiduEditorConfigEdit,
       areaList: [
+        {
+          fileName: '建设社会主义新中国',
+          editValue: '',
+          savedValue: ''
+        },
         {
           fileName: '建设社会主义新中国',
           editValue: '',

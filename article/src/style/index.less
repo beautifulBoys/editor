@@ -72,7 +72,8 @@ html, body {
           }
         }
         .content {
-          flex: 1;
+          overflow-y: auto;
+          .scroll;
           .text-area-box {
             max-width: 800px;
             border-radius: 5px;
@@ -115,92 +116,6 @@ html, body {
     }
     &.none {
       opacity: 0;
-    }
-  }
-}
-
-
-.layout-header {
-  width: 100%;
-  line-height: 30px;
-  height: 30px;
-  display: flex;
-  user-select: none;
-  border-bottom: 1px solid @color-header-slide;
-  background: @color-header-background;
-  .menu-item {
-    color: @color-text;
-    padding: 0 10px;
-    font-size: @font-size;
-    display: inline-block;
-    cursor: default;
-    text-align: center;
-    position: relative;
-    &.error {
-      &:hover {
-        background: @color-btn-hover-error-background;
-        color: #fff;
-      }
-    }
-    &:hover {
-      background: @color-btn-hover-background;
-      .ul {
-        display: block;
-      }
-    }
-    .ul {
-      padding: 0;
-      margin: 0;
-      z-index: 100;
-      position: absolute;
-      top: 45px;
-      left: 0;
-      width: 200px;
-      box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
-      display: none;
-      .li {
-        line-height: 30px;
-        font-size: @font-size;
-        list-style-type: none;
-        background: @color-hover;
-        padding: 0 15px;
-        margin: 0;
-        text-align: left;
-        color: @color-text + #444;
-
-        &:hover {
-          background: @color-hover;
-        }
-      }
-    }
-  }
-  .menu-box {
-    flex-shrink: 1;
-    .logo {
-      padding: 0 10px;
-      display: inline-block;
-      cursor: default;
-      text-align: center;
-      line-height: 50px;
-      vertical-align: top;
-      height: 50px;
-      i {
-        color: #1296db;
-        font-size: 18px;
-      }
-    }
-  }
-  .title-box {
-    font-size: @font-size;
-    color: @color-text;
-    display: inline-block;
-    padding: 0 10px;
-    flex: 1;
-    text-align: center;
-  }
-  .control-box {
-    .menu-item {
-      width: 25px;
     }
   }
 }
@@ -314,23 +229,9 @@ html, body {
   height: 45px;
   display: flex;
   user-select: none;
-  .menu-item {
-    color: @color-text;
-    padding: 0 10px;
-    font-size: @font-size;
-    display: inline-block;
-    cursor: default;
-    text-align: center;
-    &.error {
-      &:hover {
-        background: @color-hover;
-        color: #fff;
-      }
-    }
-    &:hover {
-      background: @color-hover;
-    }
-  }
+  border-bottom: 1px solid @color-header-slide;
+  background: @color-header-background;
+  
   .menu-box {
     flex-shrink: 1;
     .logo {
@@ -338,12 +239,58 @@ html, body {
       display: inline-block;
       cursor: default;
       text-align: center;
-      line-height: 30px;
+      line-height: 50px;
       vertical-align: top;
-      height: 30px;
+      height: 50px;
       i {
         color: #1296db;
         font-size: 18px;
+      }
+    }
+  }
+  .menu-item {
+    color: @color-text;
+    padding: 0 10px;
+    font-size: @font-size;
+    display: inline-block;
+    cursor: default;
+    text-align: center;
+    position: relative;
+    &.error {
+      &:hover {
+        background: @color-red;
+        color: #fff;
+      }
+    }
+    &:hover {
+      background: @color-content-splice-background;
+      .ul {
+        display: block;
+      }
+    }
+    .ul {
+      padding: 0;
+      margin: 0;
+      z-index: 100;
+      position: absolute;
+      top: 45px;
+      left: 0;
+      width: 200px;
+      box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+      display: none;
+      .li {
+        line-height: 30px;
+        font-size: @font-size;
+        list-style-type: none;
+        background: @color-hover;
+        padding: 0 15px;
+        margin: 0;
+        text-align: left;
+        color: @color-text + #444;
+
+        &:hover {
+          background: @color-hover;
+        }
       }
     }
   }
