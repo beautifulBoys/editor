@@ -18,17 +18,26 @@
         class="block-content" 
         :style="{height: windowInfo.sidebarContentHeight + 'px'}"
         @mouseover="mouseEvent($event, true)"
-        @mouseout="mouseEvent($event, false)">
-        <sidebar-list-comp :childrens="sidebar.fileList" :foldStatus="true"></sidebar-list-comp>
+        @mouseout="mouseEvent($event, false)"
+      >
+        <!-- <menu-item v-for="(item, index) in fileListData" :key="index" :item="item"></menu-item> -->
+        <!-- <sidebar-list-comp :childrens="sidebar.fileList" :foldStatus="true"></sidebar-list-comp> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
+import menuItem from '@/components/menu-item'
+import fileListData from '@/json/fold-data'
 export default {
+  components: {
+    'menu-item': menuItem
+  },
   data () {
     return {
+      tabSize: 10,
+      fileListData: []
     }
   },
   computed: {
@@ -36,6 +45,10 @@ export default {
       sidebar: state => state.sidebar,
       windowInfo: state => state.windowInfo
     })
+  },
+  mounted () {
+    // let res = this.changeFileListData(fileListData)
+    // console.log(this.fileListData)
   },
   methods: {
     // 悬浮效果
@@ -50,6 +63,16 @@ export default {
       } else {
         css && target.setAttribute('class', css.replace('hover', '').replace(/ +/g, ' '))
       }
+    },
+    changeFileListData (arr) {
+      arr.forEach(item => {
+        if (item.type === 'dir') {
+          this.fileListData.push(item)
+          this.changeFileListData(item.childrens)
+        } else if (item.type === 'file') {
+          this.fileListData.push(item)
+        }
+      })
     }
   }
 }

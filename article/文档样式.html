@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Editor</title>
+  </head>
+  <body>
+    <div id="app">
+        <p>如果你只是为了运行一下 Java 程序的话，<span class="link">那么你只需要安装</span> JRE 就可以了。如果你需要进行一些 Java 编程方面的工作，那么你就需要安装JDK了。但是，这不是绝对的。有时，即使您不打算在计算机上进行任何Java开发，仍然需要安装JDK。例如，如果要使用JSP部署Web应用程序，那么从技术上讲，您只是在应用程序服务器中运行Java程序。那你为什么需要JDK呢？因为应用程序服务器会将 JSP 转换为 Java servlet，并且需要使用 JDK 来编译 servlet。</p>
+        <p>可能在看这个问题之前很多人和我一样并没有接触和使用过 OpenJDK 。那么Oracle和OpenJDK之间是否存在重大差异？下面我通过收集到的一些资料，为你解答这个被很多人忽视的问题。</p>
+        <p>对于Java 7，没什么关键的地方。OpenJDK项目主要基于Sun捐赠的HotSpot源代码。此外，OpenJDK被选为Java 7的参考实现，由Oracle工程师维护。关于JVM，JDK，JRE和OpenJDK之间的区别，Oracle博客帖子在2012年有一个更详细的答案</p>
+        <tip>
+            <p>那么Oracle和OpenJDK之间是否存在重大差异？下面我通过收集到的一些资料，为你解答这个被很多人忽视的问题。</p>
+        </tip>
+        <p>如果你只是为了运行一下 Java 程序的话，那么你只需要安装 JRE 就可以了。如果你需要进行一些 Java 编程方面的工作，那么你就需要安装JDK了。但是，这不是绝对的。有时，即使您不打算在计算机上进行任何Java开发，仍然需要安装JDK。例如，如果要使用JSP部署Web应用程序，那么从技术上讲，您只是在应用程序服务器中运行Java程序。那你为什么需要JDK呢？因为应用程序服务器会将 JSP 转换为 Java servlet，并且需要使用 JDK 来编译 servlet。</p>
+        <p>可能在看这个问题之前很多人和我一样并没有接触和使用过 OpenJDK 。那么Oracle和OpenJDK之间是否存在重大差异？下面我通过收集到的一些资料，为你解答这个被很多人忽视的问题。</p>
+        <p>对于Java 7，没什么关键的地方。OpenJDK项目主要基于Sun捐赠的HotSpot源代码。此外，OpenJDK被选为Java 7的参考实现，由Oracle工程师维护。关于JVM，JDK，JRE和OpenJDK之间的区别，Oracle博客帖子在2012年有一个更详细的答案</p>
+    </div>
+  </body>
+  <style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #f6f6f6;
+    }
+    .link {
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+        word-wrap: break-word;
+        cursor: pointer;
+    }
+      #app {
+        width: 700px;
+        margin: 20px auto;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 5px;
+        
+      }
+    p {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        line-height: 26px;
+        text-indent: 32px;
+        color: #34495e;
+    }
+    tip {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        line-height: 26px;
+        color: #34495e;
+        display: block;
+        border-left: 5px solid #42b983;
+        padding: 16px 14px 3px 14px;
+        color: #666;
+        background-color: rgba(66, 185, 131, 0.1);
+    }
+    tip p {
+        color: #666;
+        text-indent: 0;
+    }
+  </style>
+</html>
