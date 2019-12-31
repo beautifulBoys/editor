@@ -12,7 +12,8 @@
             </div>
           </div>
           <div class="content" :style="{height: windowInfo.contentHeight + 'px'}">
-            <baidu-editor v-model="item.editValue" :config="ueConfig" class="text-area-box"></baidu-editor>
+            <baidu-editor></baidu-editor>
+            <!-- <baidu-editor @ready="ready($event, item)" v-model="item.editValue" :config="ueConfig" class="text-area-box"></baidu-editor> -->
           </div>
         </div>
       </div>
@@ -24,12 +25,12 @@
 <script>
 import Vue from 'vue'
 import { mapActions, mapState, mapMutations } from 'vuex'
-import Ueditor from 'vue-ueditor-wrap'
 
 import headerComponent from '@/layout/header'
 import footerComponent from '@/layout/footer'
 import sidebarComponent from '@/layout/sidebar'
 
+import baiduEditor from '@/components/baidu-editor'
 import sidebarItemComponent from '@/components/sidebar-item'
 import sidebarListComponent from '@/components/sidebar-list'
 
@@ -38,7 +39,7 @@ Vue.component('sidebar-list-comp', sidebarListComponent)
 
 const BaiduEditorConfigEdit = {
   autoHeightEnabled: true,
-  initialFrameHeight: 500,
+  initialFrameHeight: 1000,
   initialFrameWidth: '100%',
   serverUrl: '',
   UEDITOR_HOME_URL: '/static/UEditor/',
@@ -52,17 +53,12 @@ export default {
     'header-component': headerComponent,
     'footer-component': footerComponent,
     'sidebar-component': sidebarComponent,
-    'baidu-editor': Ueditor
+    'baidu-editor': baiduEditor
   },
   data () {
     return {
       ueConfig: BaiduEditorConfigEdit,
       areaList: [
-        {
-          fileName: '建设社会主义新中国',
-          editValue: '',
-          savedValue: ''
-        },
         {
           fileName: '建设社会主义新中国',
           editValue: '',
@@ -79,11 +75,16 @@ export default {
       e = e || window.event
       if (e.altKey && e.keyCode === 70) console.log('----------')
     }
+    console.log()
     this.initWindow()
-    this.$store.commit('initWindowSize')
   },
   methods: {
+    ready (editor, item) {
+      console.log('初始化成功', editor)
+      item.editor = editor
+    },
     initWindow () {
+      this.$store.commit('initWindowSize')
       window.onresize = (e) => {
         this.$store.commit('initWindowSize')
       }
