@@ -26,8 +26,7 @@ export default {
     <a></a>
     <a sdfsdgsd="" ></a>
     <a sdfsdgsd="" sfdsd></a>`
-    let res = s
-              .replace(/<(\/?)a[^<>]*>+/g, '<$1a>')
+    let res = s.replace(/<(\/?)a[^<>]*>+/g, '<$1a>')
     console.log(s)
     console.log(res)
     this.init()
@@ -47,7 +46,7 @@ export default {
     pasteTextHandle (content) {
       // console.log(content)
       content = content
-                      .replace(/<(\/?)([a-zA-Z0-9^]+)[^<>]*>+/g, '<$1$2>')
+                      .replace(/<(\/?)([a-zA-Z0-9]+)[^<>]*>+/g, '<$1$2>')
                       .replace(/<\/?(span|em|i)+[^<>]*>/g, '')
                       .replace(/<a\/?[^<>]*>/g, '')
                       .replace(/^[\s\r\n\t]+/, '')
