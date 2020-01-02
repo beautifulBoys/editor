@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="content" :style="{height: windowInfo.contentHeight + 'px'}">
-            <baidu-editor></baidu-editor>
+            <wang-editor></wang-editor>
             <!-- <baidu-editor @ready="ready($event, item)" v-model="item.editValue" :config="ueConfig" class="text-area-box"></baidu-editor> -->
           </div>
         </div>
@@ -30,7 +30,7 @@ import headerComponent from '@/layout/header'
 import footerComponent from '@/layout/footer'
 import sidebarComponent from '@/layout/sidebar'
 
-import baiduEditor from '@/components/baidu-editor'
+import wangEditor from '@/components/wang-editor'
 import sidebarItemComponent from '@/components/sidebar-item'
 import sidebarListComponent from '@/components/sidebar-list'
 
@@ -53,7 +53,7 @@ export default {
     'header-component': headerComponent,
     'footer-component': footerComponent,
     'sidebar-component': sidebarComponent,
-    'baidu-editor': baiduEditor
+    'wang-editor': wangEditor
   },
   data () {
     return {

@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// import '../../static/UEditor/ueditor.all.min.js'
 import wangEditor from '../../static/wangEditor'
 import { mapActions, mapState, mapMutations } from 'vuex'
 
@@ -44,17 +43,12 @@ export default {
     initEvent () {
     },
     pasteTextHandle (content) {
-      // console.log(content)
       content = content
                       .replace(/<(\/?)([a-zA-Z0-9]+)[^<>]*>+/g, '<$1$2>')
                       .replace(/<\/?(span|em|i)+[^<>]*>/g, '')
                       .replace(/<a\/?[^<>]*>/g, '')
                       .replace(/^[\s\r\n\t]+/, '')
                       .replace(/[\s\r\n\t]+$/, '')
-                      // .replace(/<([a-zA-Z]+) ?[^<>]*>/g, '<$1>')
-                      // .replace(/<\/?a>/g, '')
-                      // .replace(/<br\/?>/g, '')
-      console.log(content)
       return content
     },
     onchangeHandle (content) {

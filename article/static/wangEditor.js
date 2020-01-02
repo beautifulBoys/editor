@@ -3056,9 +3056,16 @@ function getPasteHtml(e, filterStyle, ignoreImg) {
     if (docSplitHtml.length === 2) {
         pasteHtml = docSplitHtml[0] + '</html>';
     }
+    docSplitHtml = pasteHtml.split('</head>');
+    if (docSplitHtml.length === 2) {
+        pasteHtml = docSplitHtml[1];
+    }
+    
 
     // 过滤无用标签
     pasteHtml = pasteHtml.replace(/<(meta|script|link).+?>/igm, '');
+    // 过滤空标签
+    pasteHtml = pasteHtml.replace(/<[^<>]*><\/[^<>]*>/igm, '');
     // 去掉注释
     pasteHtml = pasteHtml.replace(/<!--.*?-->/mg, '');
     // 过滤 data-xxx 属性
