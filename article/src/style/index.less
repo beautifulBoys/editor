@@ -41,38 +41,76 @@ html, body {
           box-sizing: border-box;
           border-bottom: 1px solid @color-content-splice-deep-background;
           box-shadow: 0 2px 4px rgba(146, 84, 84, 0.08);
-        }
-        .content-header {
-          line-height: 20px;
-          border-top: 2px solid #292B34;
-          border-right: 1px solid @color-content-splice-background;
-          color: @color-text;
-          padding: 9px;
-          font-size: @font-size;
-          display: inline-block;
-          .file-name {
-            margin-right: 5px;
-            display: inline-block;
-            max-width: 100px;
+          display: flex;
+          .content-header-left {
+            flex: 1;
             overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            vertical-align: top;
-          }
-          .iconfont {
-            border-radius: 100%;
-            cursor: pointer;
-            padding: 1px;
-            font-size: @font-size;
-            &:hover {
-              background: @color-red;
-              color: #fff;
+            .file-item-header {
+              line-height: 20px;
+              border-right: 1px solid @color-content-splice-background;
+              color: @color-text;
+              padding: 10px 8px;
+              font-size: @font-size;
+              display: inline-block;
+              cursor: pointer;
+              position: relative;
+              &::after {
+                content: " ";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 2px;
+                display: inline-block;
+                width: 0;
+                transition: width 0.3s;
+                z-index: 100;
+              }
+              .file-name {
+                display: inline-block;
+                max-width: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                vertical-align: top;
+              }
+              .iconfont {
+                border-radius: 100%;
+                cursor: pointer;
+                padding: 1px;
+                font-size: @font-size;
+                // opacity: 0;
+                &:hover {
+                  background: @color-red;
+                  color: #fff;
+                }
+              }
+              &.active, &:hover {
+                background: #f6f6f6;
+                .iconfont {
+                  // opacity: 1;
+                }
+                &::after {
+                  width: 100%;
+                  background: @color-text;
+                }
+              }
             }
           }
-          &.active, &:hover {
-            background: #f6f6f6;
+          .content-header-right {
+            width: 40px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            .iconfont {
+              font-size: 2 * @font-size;
+              color: @color-icon-default;
+            }
+            &:hover .iconfont {
+              color: @color-text;
+            }
           }
         }
+        
         .content {
           overflow: auto;
           padding: 0 10px;
@@ -149,7 +187,7 @@ html, body {
       width: 100%;
       text-align: center;
       line-height: 50px;
-      color: #aaa;
+      color: @color-icon-default;
       cursor: pointer;
       .iconfont {
         font-size: 30px;

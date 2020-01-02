@@ -1,3 +1,4 @@
+
 export const Page = class {
   savedContent = ''
   editContent = ''

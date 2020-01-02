@@ -4,14 +4,30 @@
     <div class="layout-body">
       <sidebar-component></sidebar-component>
       <div class="layout-content">
-        <div class="area" v-for="(item, index) in areaList" :key="index">
+        <div class="area" v-for="(area, areaIndex) in areaList" :key="areaIndex">
           <div class="header-box">
-            <div class="content-header">
-              <span class="file-name">{{item.fileName}}</span>
-              <i class="iconfont">&#xeb2c;</i>
+            <div class="content-header-left">
+              <div
+                :class="['file-item-header', {active: area.cursor === page.id}]"
+                v-for="(page, pageIndex) in area.pages"
+                @click="switchPage(area, page)"
+                :key="pageIndex"
+              >
+                <span class="file-name">{{page.name}}</span>
+                <i class="iconfont">&#xeb2c;</i>
+              </div>
+            </div>
+            <div class="content-header-right" @click="addAreaEvent(area, index)">
+              <i class="iconfont">&#xead1;</i>
             </div>
           </div>
-          <div class="content" :style="{height: windowInfo.contentHeight + 'px'}">
+          <div
+            class="content"
+            :style="{height: windowInfo.contentHeight + 'px'}"
+            v-for="(page, pageIndex) in area.pages"
+            v-show="area.cursor === page.id"
+            :key="pageIndex"
+          >
             <wang-editor></wang-editor>
           </div>
         </div>
@@ -40,17 +56,11 @@ export default {
   },
   data () {
     return {
-      areaList: [
-        {
-          fileName: '建设社会主义新中国',
-          editValue: '',
-          savedValue: ''
-        }
-      ]
     }
   },
   computed: mapState({
-    windowInfo: state => state.windowInfo
+    windowInfo: state => state.windowInfo,
+    areaList: state => state.content.areaList
   }),
   mounted () {
     this.initWindow()
@@ -71,6 +81,12 @@ export default {
         e = e || window.event
         if (e.altKey && e.keyCode === 70) console.log('----------')
       }
+    },
+    addAreaEvent (area, index) {
+      this.$store.commit('addArea', {area, index})
+    },
+    switchPage (area, page) {
+      area.cursor = page.id
     }
   }
 }

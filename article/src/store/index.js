@@ -46,14 +46,13 @@ const store = new Vuex.Store({
     sidebar: {
       topId: 1,
       top: [
-        {id: 1, text: '资源管理器', icon: '&#xebbc;'},
+        {id: 1, text: '项目', icon: '&#xebbc;'},
         {id: 2, text: '搜索', icon: '&#xeb4b;'},
-        {id: 3, text: '源代码管理器', icon: '&#xe632;'},
-        {id: 4, text: '调试', icon: '&#xeb0c;'},
+        {id: 3, text: '主题', icon: '&#xeb1f;'},
         {id: 5, text: '拓展', icon: '&#xebbf;'}
       ],
       bottom: [
-        {id: 6, text: '管理', icon: '&#xeb44;'}
+        {id: 6, text: '设置', icon: '&#xeb44;'}
       ],
       fileList: fileList,
       source: {
@@ -63,7 +62,38 @@ const store = new Vuex.Store({
       }
     },
     content: {
-      list: []
+      cursor: 0,
+      vid: 0,
+      areaList: [
+        {
+          id: 0,
+          cursor: 0,
+          pages: [
+            {
+              id: 0,
+              name: '新中国成立了'
+            },
+            {
+              id: 1,
+              name: '哈哈哈哈哈'
+            }
+          ]
+        },
+        {
+          id: 1,
+          cursor: 0,
+          pages: [
+            {
+              id: 0,
+              name: '李鑫测试文件'
+            },
+            {
+              id: 1,
+              name: '嘿嘿嘿'
+            }
+          ]
+        }
+      ]
     },
     footer: {}
   },
@@ -77,6 +107,13 @@ const store = new Vuex.Store({
     createPage (state, info) {
       info = ''
       state.content.list.push(info)
+    },
+    addArea (state, {area, index}) {
+      state.content.areaList.push({
+        id: ++state.content.vid,
+        cursor: null,
+        pages: []
+      })
     }
   }
 })
