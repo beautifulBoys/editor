@@ -20,14 +20,6 @@ export default {
     windowInfo: state => state.windowInfo
   }),
   mounted () {
-    let s = `
-    <a href="sf" href='' >隆盛科技烦死啦更好地开拉黑时代光华</a>
-    <a></a>
-    <a sdfsdgsd="" ></a>
-    <a sdfsdgsd="" sfdsd></a>`
-    let res = s.replace(/<(\/?)a[^<>]*>+/g, '<$1a>')
-    console.log(s)
-    console.log(res)
     this.init()
   },
   methods: {
