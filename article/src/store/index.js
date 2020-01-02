@@ -71,8 +71,8 @@ const store = new Vuex.Store({
     initWindowSize (state) {
       state.windowInfo.innerHeight = window.innerHeight
       state.windowInfo.innerWidth = window.innerWidth
-      state.windowInfo.sidebarContentHeight = window.innerHeight - 107
-      state.windowInfo.contentHeight = window.innerHeight - 110
+      state.windowInfo.sidebarContentHeight = window.innerHeight - 45 - 25 - 40 - 30
+      state.windowInfo.contentHeight = window.innerHeight - 45 - 25 - 40
     },
     createPage (state, info) {
       info = ''

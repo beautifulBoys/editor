@@ -37,6 +37,8 @@ html, body {
           width: 100%;
           background: #fff;
           user-select: none;
+          height: 40px;
+          box-sizing: border-box;
           border-bottom: 1px solid @color-content-splice-deep-background;
           box-shadow: 0 2px 4px rgba(146, 84, 84, 0.08);
         }
@@ -44,8 +46,8 @@ html, body {
           line-height: 20px;
           border-top: 2px solid #292B34;
           border-right: 1px solid @color-content-splice-background;
-          color: #333;
-          padding: 10px;
+          color: @color-text;
+          padding: 9px;
           font-size: @font-size;
           display: inline-block;
           .file-name {
@@ -93,35 +95,41 @@ html, body {
 }
 
 
-.sidebar-item-line {
+.sidebar-menu-item {
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   user-select: none;
-  line-height: 35px;
-  color: #ccc;
+  line-height: 34px;
+  height: 35px;
+  color: @color-text;
   font-size: @font-size;
   cursor: pointer;
   border-bottom: 1px solid @color-border;
-  &.hover, &.selected {
-    background: fade(red, 5);
+  background: @color-text;
+  overflow: hidden;
+  &:last-child {
+    border: none;
   }
-  .step {
-    display: inline-block;
+  .sidebar-menu-item-box {
+    transition: transform 0.2s;
+    background: #fff;
+    padding: 0 15px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &:hover {
+    .sidebar-menu-item-box {
+      transform: translateX(8px);
+      // background: fade(@color-text, 0.5);
+    }
   }
   .iconfont {
     display: inline-block;
-    &.fold {
-      transform: rotate(90deg);
-    }
     &.icon {
       font-size: 16px;
       vertical-align: middle;
-    }
-    &.none {
-      opacity: 0;
     }
   }
 }
@@ -164,11 +172,30 @@ html, body {
       width: 100%;
     }
     .file-title {
+      height: 40px;
       line-height: 40px;
       color: @color-text;
       font-size: @font-size;
       padding: 0 10px;
       cursor: default;
+      box-sizing: border-box;
+      border-bottom: 1px solid @color-sidebar-slide;
+      background: #fff;
+    }
+    .bread-menu {
+      height: 30px;
+      box-sizing: border-box;
+      line-height: 30px;
+      border-bottom: 1px solid @color-sidebar-slide;
+      color: @color-text;
+      font-size: @font-size - 2px;
+      padding: 0 10px;
+      .bread-menu-item {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
     .block-title {
       line-height: 25px;
@@ -189,8 +216,8 @@ html, body {
 
 .layout-footer {
   width: 100%;
-  line-height: 20px;
-  height: 20px;
+  line-height: 25px;
+  height: 25px;
   padding: 0 10px;
   box-sizing: border-box;
   user-select: none;
@@ -198,7 +225,7 @@ html, body {
   background: @color-footer-background;
   border-top: 1px solid @color-footer-slide;
   .iconfont {
-    line-height: 20px;
+    line-height: 25px;
     font-size: 16px;
     display: inline-block;
     text-align: center;
@@ -208,7 +235,7 @@ html, body {
     display: inline-block;
     margin-right: 5px;
     font-size: @font-size;
-    line-height: 20px;
+    line-height: 25px;
     color: #888;
     &.fr {
       float: right;
@@ -219,7 +246,7 @@ html, body {
     display: inline-block;
     margin: 0 2px;
     font-size: @font-size;
-    line-height: 20px;
+    line-height: 25px;
     color: #888;
     padding: 0 7px;
     &:hover {
@@ -231,9 +258,10 @@ html, body {
 
 .layout-header {
   width: 100%;
-  line-height: 45px;
+  line-height: 44px;
   height: 45px;
   display: flex;
+  box-sizing: border-box;
   user-select: none;
   border-bottom: 1px solid @color-header-slide;
   background: @color-header-background;
@@ -245,9 +273,9 @@ html, body {
       display: inline-block;
       cursor: default;
       text-align: center;
-      line-height: 50px;
+      line-height: 44px;
       vertical-align: top;
-      height: 50px;
+      height: 44px;
       i {
         color: #1296db;
         font-size: 18px;

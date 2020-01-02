@@ -9,7 +9,7 @@
         </ul>
       </div>
     </div>
-    <div class="title-box">{{header.fileTitle ? header.fileTitle + ' - ' : ''}}Visual Studio Code</div>
+    <div class="title-box">{{header.fileTitle ? header.fileTitle + ' - ' : ''}}Editor</div>
     <div class="control-box">
       <div class="menu-item"><i class="iconfont">&#xeb36;</i></div>
       <div class="menu-item"><i class="iconfont">&#xeb05;</i></div>

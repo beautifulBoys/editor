@@ -56,7 +56,6 @@ export default {
 <style lang="less" scoped>
 .editor-box {
   width: 100%;
-  height: 100%;
   font-size: 12px;
   .toolbar {
     display: none;
