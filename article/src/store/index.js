@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     windowInfo: {
       innerHeight: 0,
       innerWidth: 0,
+      sidebarHeight: 0,
       sidebarContentHeight: 0,
       contentHeight: 0
     },
@@ -23,7 +24,12 @@ const store = new Vuex.Store({
             list: [
               {
                 id: 14,
-                text: '打开文件夹',
+                text: '打开目录',
+                cmd: ['Ctrl', 'N']
+              },
+              {
+                id: 15,
+                text: '导出项目',
                 cmd: ['Ctrl', 'N']
               }
             ]
@@ -49,10 +55,10 @@ const store = new Vuex.Store({
         {id: 1, text: '项目', icon: '&#xebbc;'},
         {id: 2, text: '搜索', icon: '&#xeb4b;'},
         {id: 3, text: '主题', icon: '&#xeb1f;'},
-        {id: 5, text: '拓展', icon: '&#xebbf;'}
+        {id: 4, text: '拓展', icon: '&#xebbf;'}
       ],
       bottom: [
-        {id: 6, text: '设置', icon: '&#xeb44;'}
+        {id: 5, text: '设置', icon: '&#xeb44;'}
       ],
       fileList: fileList,
       source: {
@@ -64,36 +70,18 @@ const store = new Vuex.Store({
     content: {
       cursor: 0,
       vid: 0,
-      areaList: [
-        {
+      areaMap: {
+        0: {
           id: 0,
           cursor: 0,
-          pages: [
-            {
-              id: 0,
-              name: '新中国成立了'
-            },
-            {
+          pageMap: {
+            0: {
               id: 1,
-              name: '哈哈哈哈哈'
-            }
-          ]
-        },
-        {
-          id: 1,
-          cursor: 0,
-          pages: [
-            {
-              id: 0,
               name: '李鑫测试文件'
-            },
-            {
-              id: 1,
-              name: '嘿嘿嘿'
             }
-          ]
+          }
         }
-      ]
+      }
     },
     footer: {}
   },
@@ -101,19 +89,30 @@ const store = new Vuex.Store({
     initWindowSize (state) {
       state.windowInfo.innerHeight = window.innerHeight
       state.windowInfo.innerWidth = window.innerWidth
+      state.windowInfo.sidebarHeight = window.innerHeight - 45 - 25
       state.windowInfo.sidebarContentHeight = window.innerHeight - 45 - 25 - 40 - 30
       state.windowInfo.contentHeight = window.innerHeight - 45 - 25 - 40
     },
-    createPage (state, info) {
-      info = ''
-      state.content.list.push(info)
+    setSidebarTabId (state, {id}) {
+      state.sidebar.topId = id
     },
     addArea (state, {area, index}) {
-      state.content.areaList.push({
-        id: ++state.content.vid,
-        cursor: null,
-        pages: []
-      })
+      let id = ++state.content.vid
+      state.content.areaMap[id] = {
+        id,
+        cursor: 0,
+        pageMap: {}
+      }
+    },
+    openPage (state, {areaId = 0}) {
+      let pageId = ++state.content.vid
+      state.content.areaMap[areaId].pageMap[pageId] = {
+        id: pageId,
+        name: '新增加的' + pageId
+      }
+    },
+    closePage (state, {areaId, pageId}) {
+      delete state.content.areaMap[areaId].pageMap[pageId]
     }
   }
 })

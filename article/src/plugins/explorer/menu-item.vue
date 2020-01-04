@@ -1,5 +1,5 @@
 <template>
-  <div :class="['sidebar-menu-item']" @click="event">
+  <div class="sidebar-menu-item" @click="event">
     <div class="sidebar-menu-item-box">
       <i class="iconfont icon" v-html="iconMap[item.type] || iconMap.file"></i>
       <span v-if="item.type === 'file'">{{item.fullName}}</span>

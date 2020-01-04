@@ -4,29 +4,29 @@
     <div class="layout-body">
       <sidebar-component></sidebar-component>
       <div class="layout-content">
-        <div class="area" v-for="(area, areaIndex) in areaList" :key="areaIndex">
+        <div class="area" v-for="(area, areaId) of areaMap" :key="areaId">
           <div class="header-box">
             <div class="content-header-left">
               <div
                 :class="['file-item-header', {active: area.cursor === page.id}]"
-                v-for="(page, pageIndex) in area.pages"
+                v-for="(page, pageId) of area.pageMap"
                 @click="switchPage(area, page)"
-                :key="pageIndex"
+                :key="pageId"
               >
                 <span class="file-name">{{page.name}}</span>
-                <i class="iconfont">&#xeb2c;</i>
+                <i class="iconfont" @click="closePage(areaId, pageId)">&#xeb2c;</i>
               </div>
             </div>
-            <div class="content-header-right" @click="addAreaEvent(area, index)">
+            <div class="content-header-right" @click="addAreaEvent(area, areaId)">
               <i class="iconfont">&#xead1;</i>
             </div>
           </div>
           <div
             class="content"
             :style="{height: windowInfo.contentHeight + 'px'}"
-            v-for="(page, pageIndex) in area.pages"
+            v-for="(page, pageId) in area.pageMap"
             v-show="area.cursor === page.id"
-            :key="pageIndex"
+            :key="pageId"
           >
             <wang-editor></wang-editor>
           </div>
@@ -60,7 +60,7 @@ export default {
   },
   computed: mapState({
     windowInfo: state => state.windowInfo,
-    areaList: state => state.content.areaList
+    areaMap: state => state.content.areaMap
   }),
   mounted () {
     this.initWindow()
@@ -87,6 +87,12 @@ export default {
     },
     switchPage (area, page) {
       area.cursor = page.id
+    },
+    closePage (areaId, pageId) {
+      this.$store.commit('closePage', {areaId, pageId})
+    },
+    openPage () {
+      this.$store.commit('openPage', {})
     }
   }
 }
