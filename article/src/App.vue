@@ -8,16 +8,16 @@
           <div class="header-box">
             <div class="content-header-left">
               <div
-                :class="['file-item-header', {active: area.cursor === page.id}]"
+                :class="['file-item-header', {active: area.cursor === pageIndex}]"
                 v-for="(page, pageIndex) in area.pageList"
-                @click="switchPage(area, page)"
+                @click="switchPage(area, areaIndex, page, pageIndex)"
                 :key="pageIndex"
               >
                 <span class="file-name">{{page.name}}</span>
                 <i class="iconfont" @click="closePage(area, areaIndex, page, pageIndex)">&#xeb2c;</i>
               </div>
             </div>
-            <div class="content-header-right" @click="addAreaEvent(area)">
+            <div class="content-header-right" @click="addAreaEvent(area, areaIndex)">
               <i class="iconfont">&#xead1;</i>
             </div>
           </div>
@@ -28,7 +28,11 @@
             v-show="area.cursor === pageIndex"
             :key="pageIndex"
           >
-            <wang-editor :page="page"></wang-editor>
+            <wang-editor
+              :page="page"
+              @focus="focusEvent(area, areaIndex, page, pageIndex)"
+              @change="changeEvent"
+            ></wang-editor>
           </div>
         </div>
       </div>
@@ -82,14 +86,20 @@ export default {
         if (e.altKey && e.keyCode === 70) console.log('----------')
       }
     },
-    addAreaEvent (area, index) {
-      this.$store.commit('addArea', {area, index})
+    addAreaEvent (area, areaIndex) {
+      this.$store.commit('addArea', {})
     },
-    switchPage (area, page) {
-      this.$store.commit('changePageCursor', {areaId: area.id, pageId: page.id})
+    switchPage (area, areaIndex, page, pageIndex) {
+      this.$store.commit('changePageCursor', {areaIndex, pageIndex})
     },
     closePage (area, areaIndex, page, pageIndex) {
-      this.$store.commit('closePage', {area, areaIndex, page, pageIndex})
+      this.$store.commit('closePage', {areaIndex, pageIndex})
+    },
+    focusEvent (area, areaIndex, page, pageIndex) {
+      this.$store.commit('changePageCursor', {areaIndex, pageIndex})
+    },
+    changeEvent () {
+      
     }
   }
 }

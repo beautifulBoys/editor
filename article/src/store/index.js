@@ -86,27 +86,21 @@ const store = new Vuex.Store({
     footer: {}
   },
   mutations: {
-    initWindowSize (state) {
+    'initWindowSize' (state) {
       state.windowInfo.innerHeight = window.innerHeight
       state.windowInfo.innerWidth = window.innerWidth
       state.windowInfo.sidebarHeight = window.innerHeight - 45 - 25
       state.windowInfo.sidebarContentHeight = window.innerHeight - 45 - 25 - 40 - 30
       state.windowInfo.contentHeight = window.innerHeight - 45 - 25 - 40
     },
-    setSidebarTabId (state, {id}) {
+    'setSidebarTabId' (state, {id}) {
       state.sidebar.topId = id
     },
-    changePageCursor (state, {areaId, pageId}) {
-      state.content.areaList.forEach((area, areaIndex) => {
-        area.pageList.forEach((page, pageIndex) => {
-          if (area.id === areaId && page.id === pageId) {
-            state.content.cursor = areaIndex
-            area.cursor = pageIndex
-          }
-        })
-      })
+    'changePageCursor' (state, {areaIndex, pageIndex}) {
+      state.content.cursor = areaIndex
+      state.content.areaList[areaIndex].cursor = pageIndex
     },
-    addArea (state, {area, index}) {
+    'addArea' (state, {}) {
       let id = ++state.content.vid
       state.content.areaList.push({
         id,
@@ -115,7 +109,7 @@ const store = new Vuex.Store({
       })
       state.content.cursor = state.content.areaList.length - 1
     },
-    openPage (state, info) {
+    'openPage' (state, info) {
       let id = ++state.content.vid
       let areaCursor = state.content.cursor
       let area = state.content.areaList[areaCursor]
@@ -125,7 +119,7 @@ const store = new Vuex.Store({
       })
       area.cursor = area.pageList.length - 1
     },
-    closePage (state, {area, areaIndex, page, pageIndex}) {
+    'closePage' (state, {areaIndex, pageIndex}) {
       let areas = state.content.areaList[areaIndex]
       if (pageIndex === areas.pageList.length - 1) {
         areas.cursor = pageIndex === 0 ? 0 : pageIndex - 1
