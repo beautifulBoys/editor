@@ -10,15 +10,15 @@ import wangEditor from '../../static/wangEditor'
 import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
+  props: ['page'],
   components: {
   },
   data () {
     return {
+      editContent: '',
+      savedContent: ''
     }
   },
-  computed: mapState({
-    windowInfo: state => state.windowInfo
-  }),
   mounted () {
     this.init()
   },
@@ -30,21 +30,31 @@ export default {
       this.editor.customConfig.pasteTextHandle = this.pasteTextHandle
       this.editor.customConfig.onchangeTimeout = 1000
       this.editor.customConfig.onchange = this.onchangeHandle
+      this.editor.customConfig.onfocus = this.onfocusHandle
+      this.editor.customConfig.onblur = this.onblurHandle
       this.editor.create()
     },
     initEvent () {
     },
     pasteTextHandle (content) {
       content = content
-                      .replace(/<(\/?)([a-zA-Z0-9]+)[^<>]*>+/g, '<$1$2>')
-                      .replace(/<\/?(span|em|i)+[^<>]*>/g, '')
-                      .replace(/<a\/?[^<>]*>/g, '')
-                      .replace(/^[\s\r\n\t]+/, '')
-                      .replace(/[\s\r\n\t]+$/, '')
+                .replace(/<(\/?)([a-zA-Z0-9]+)[^<>]*>+/g, '<$1$2>')
+                .replace(/<\/?(span|em|i)+[^<>]*>/g, '')
+                .replace(/<a\/?[^<>]*>/g, '')
+                .replace(/^[\s\r\n\t]+/, '')
+                .replace(/[\s\r\n\t]+$/, '')
       return content
     },
     onchangeHandle (content) {
-      // console.log(content)
+      this.$emit('change', content)
+    },
+    onfocusHandle () {
+      console.log('focus')
+      this.$emit('focus')
+    },
+    onblurHandle (html) {
+      console.log('blur')
+      this.$emit('blur')
     },
     get () {
       let res = this.editor.txt.html()

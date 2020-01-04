@@ -48,7 +48,7 @@ export default {
         this.breadList.push(item)
       } else if (item.type === 'file') {
         console.log('打开文件')
-        this.$store.commit('openPage', {areaId: 0})
+        this.$store.commit('openPage', item)
       }
     },
     // 面包屑路径点击事件

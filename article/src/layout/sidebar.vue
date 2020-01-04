@@ -60,16 +60,6 @@ export default {
     })
   },
   methods: {
-    // 工作目录点击事件
-    menuEvent (item) {
-      if (item.type === 'dir') {
-        this.list = item.childrens
-        this.breadList.push(item)
-      } else if (item.type === 'file') {
-        console.log('打开文件')
-        this.$store.commit('openPage', {areaId: 0})
-      }
-    },
     // 面包屑路径点击事件
     breadItemEvent (item, index) {
       this.list = item.childrens

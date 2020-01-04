@@ -4,31 +4,31 @@
     <div class="layout-body">
       <sidebar-component></sidebar-component>
       <div class="layout-content">
-        <div class="area" v-for="(area, areaId) of areaMap" :key="areaId">
+        <div class="area" v-for="(area, areaIndex) in areaList" :key="areaIndex">
           <div class="header-box">
             <div class="content-header-left">
               <div
                 :class="['file-item-header', {active: area.cursor === page.id}]"
-                v-for="(page, pageId) of area.pageMap"
+                v-for="(page, pageIndex) in area.pageList"
                 @click="switchPage(area, page)"
-                :key="pageId"
+                :key="pageIndex"
               >
                 <span class="file-name">{{page.name}}</span>
-                <i class="iconfont" @click="closePage(areaId, pageId)">&#xeb2c;</i>
+                <i class="iconfont" @click="closePage(area, areaIndex, page, pageIndex)">&#xeb2c;</i>
               </div>
             </div>
-            <div class="content-header-right" @click="addAreaEvent(area, areaId)">
+            <div class="content-header-right" @click="addAreaEvent(area)">
               <i class="iconfont">&#xead1;</i>
             </div>
           </div>
           <div
             class="content"
             :style="{height: windowInfo.contentHeight + 'px'}"
-            v-for="(page, pageId) in area.pageMap"
-            v-show="area.cursor === page.id"
-            :key="pageId"
+            v-for="(page, pageIndex) in area.pageList"
+            v-show="area.cursor === pageIndex"
+            :key="pageIndex"
           >
-            <wang-editor></wang-editor>
+            <wang-editor :page="page"></wang-editor>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default {
   },
   computed: mapState({
     windowInfo: state => state.windowInfo,
-    areaMap: state => state.content.areaMap
+    areaList: state => state.content.areaList
   }),
   mounted () {
     this.initWindow()
@@ -86,13 +86,10 @@ export default {
       this.$store.commit('addArea', {area, index})
     },
     switchPage (area, page) {
-      area.cursor = page.id
+      this.$store.commit('changePageCursor', {areaId: area.id, pageId: page.id})
     },
-    closePage (areaId, pageId) {
-      this.$store.commit('closePage', {areaId, pageId})
-    },
-    openPage () {
-      this.$store.commit('openPage', {})
+    closePage (area, areaIndex, page, pageIndex) {
+      this.$store.commit('closePage', {area, areaIndex, page, pageIndex})
     }
   }
 }

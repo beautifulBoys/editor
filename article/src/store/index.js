@@ -70,18 +70,18 @@ const store = new Vuex.Store({
     content: {
       cursor: 0,
       vid: 0,
-      areaMap: {
-        0: {
+      areaList: [
+        {
           id: 0,
           cursor: 0,
-          pageMap: {
-            0: {
-              id: 1,
-              name: '李鑫测试文件'
+          pageList: [
+            {
+              id: 0,
+              name: '新建文件'
             }
-          }
+          ]
         }
-      }
+      ]
     },
     footer: {}
   },
@@ -96,23 +96,41 @@ const store = new Vuex.Store({
     setSidebarTabId (state, {id}) {
       state.sidebar.topId = id
     },
+    changePageCursor (state, {areaId, pageId}) {
+      state.content.areaList.forEach((area, areaIndex) => {
+        area.pageList.forEach((page, pageIndex) => {
+          if (area.id === areaId && page.id === pageId) {
+            state.content.cursor = areaIndex
+            area.cursor = pageIndex
+          }
+        })
+      })
+    },
     addArea (state, {area, index}) {
       let id = ++state.content.vid
-      state.content.areaMap[id] = {
+      state.content.areaList.push({
         id,
         cursor: 0,
-        pageMap: {}
-      }
+        pageList: []
+      })
+      state.content.cursor = state.content.areaList.length - 1
     },
-    openPage (state, {areaId = 0}) {
-      let pageId = ++state.content.vid
-      state.content.areaMap[areaId].pageMap[pageId] = {
-        id: pageId,
-        name: '新增加的' + pageId
-      }
+    openPage (state, info) {
+      let id = ++state.content.vid
+      let areaCursor = state.content.cursor
+      let area = state.content.areaList[areaCursor]
+      area.pageList.push({
+        id,
+        ...info
+      })
+      area.cursor = area.pageList.length - 1
     },
-    closePage (state, {areaId, pageId}) {
-      delete state.content.areaMap[areaId].pageMap[pageId]
+    closePage (state, {area, areaIndex, page, pageIndex}) {
+      let areas = state.content.areaList[areaIndex]
+      if (pageIndex === areas.pageList.length - 1) {
+        areas.cursor = pageIndex === 0 ? 0 : pageIndex - 1
+      }
+      areas.pageList.splice(pageIndex, 1)
     }
   }
 })
