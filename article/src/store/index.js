@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
+import menu from '@/store/menu'
+
 import fileList from '@/json/fold-data'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  namespaced: true,
   state: {
     windowInfo: {
       innerHeight: 0,
@@ -126,6 +130,9 @@ const store = new Vuex.Store({
       }
       areas.pageList.splice(pageIndex, 1)
     }
+  },
+  modules: {
+    menu
   }
 })
 

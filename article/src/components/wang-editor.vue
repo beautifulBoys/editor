@@ -1,5 +1,6 @@
 <template>
-  <div class="editor-box">
+  <div class="content-editor-box">
+    <button @click="get">获取</button>
     <div ref="toolbar" class="toolbar"></div>
     <div ref="editor" class="text-area-box"></div>
   </div>
@@ -69,14 +70,14 @@ export default {
       this.$emit('blur')
     },
     get () {
-      let res = this.editor.txt.html()
+      let res = this.editor.txt.text()
       console.log(res)
     }
   }
 }
 </script>
-<style lang="less" scoped>
-.editor-box {
+<style lang="less">
+.content-editor-box {
   width: 100%;
   font-size: 12px;
   .toolbar {

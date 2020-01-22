@@ -23,7 +23,6 @@
 <script>
 import Vue from 'vue'
 import { mapActions, mapState, mapMutations } from 'vuex'
-import menuItem from '@/components/menu-item'
 import fileListData from '@/json/fold-data'
 
 import explorer from '@/plugins/explorer'
@@ -37,7 +36,6 @@ Vue.use(theme)
 Vue.use(expand)
 export default {
   components: {
-    'menu-item': menuItem
   },
   data () {
     return {

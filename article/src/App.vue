@@ -38,6 +38,7 @@
       </div>
     </div>
     <footer-component></footer-component>
+    <menu-component></menu-component>
   </div>
 </template>
 
@@ -48,6 +49,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import headerComponent from '@/layout/header'
 import footerComponent from '@/layout/footer'
 import sidebarComponent from '@/layout/sidebar'
+import menuComponent from '@/components/menu'
 
 import wangEditor from '@/components/wang-editor'
 
@@ -56,6 +58,7 @@ export default {
     'header-component': headerComponent,
     'footer-component': footerComponent,
     'sidebar-component': sidebarComponent,
+    'menu-component': menuComponent,
     'wang-editor': wangEditor
   },
   data () {
@@ -78,6 +81,9 @@ export default {
       this.$store.commit('initWindowSize')
       window.onresize = (e) => {
         this.$store.commit('initWindowSize')
+      }
+      document.oncontextmenu = (e) => {
+        return false
       }
     },
     initEvent () {
