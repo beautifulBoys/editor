@@ -8,7 +8,13 @@
       </span>
     </div>
     <div class="block-content" :style="{height: windowInfo.sidebarHeight - 70 + 'px'}">
-      <menu-item v-for="(item, index) in list" :key="index" :item="item" @event="menuEvent"></menu-item>
+      <menu-item
+        :item="item"
+        @event="menuEvent"
+        v-for="(item, index) in list"
+        @contextmenu="contextmenuEvent"
+        :key="index"
+      ></menu-item>
     </div>
   </div>
 </template>
@@ -50,6 +56,15 @@ export default {
         console.log('打开文件')
         this.$store.commit('openPage', item)
       }
+    },
+    // 工作目录右键菜单
+    contextmenuEvent (e, item) {
+      if (item.type === 'dir') {
+        this.$store.commit('menu/change', {type: 'dir', active: true, event: e})
+      } else if (item.type === 'file') {
+        this.$store.commit('menu/change', {type: 'file', active: true, event: e})
+      }
+      return false
     },
     // 面包屑路径点击事件
     breadItemEvent (item, index) {

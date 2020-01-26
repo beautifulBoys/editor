@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-menu-item" @click="event">
+  <div class="sidebar-menu-item" @click="event" @contextmenu="contextmenuEvent($event, item)">
     <div class="sidebar-menu-item-box">
       <i class="iconfont icon" v-html="iconMap[item.type] || iconMap.file"></i>
       <span v-if="item.type === 'file'">{{item.fullName}}</span>
@@ -23,6 +23,10 @@ export default {
     event (e) {
       e.stopPropagation()
       this.$emit('event', this.item)
+    },
+    // 右键菜单
+    contextmenuEvent(e, item) {
+      this.$emit('contextmenu', e, item)
     }
   }
 }
