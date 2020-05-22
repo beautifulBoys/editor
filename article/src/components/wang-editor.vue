@@ -72,6 +72,11 @@ export default {
     get () {
       let res = this.editor.txt.text()
       console.log(res)
+    },
+    filterTag (str) {
+      str = str.replace(/<\/?[^<>]*>/g, '')
+      str = str.replace(/[\r\n]+/g, '\r\n')
+      return str
     }
   }
 }
