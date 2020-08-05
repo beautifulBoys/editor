@@ -1,7 +1,21 @@
 <template>
   <div class="sidebar-theme-item">
-    <img src="./images/icon_color1.png" class="img"/>
-    <div class="title">炫酷科技黑</div>
+    <div class="sidebar-theme-item-line">
+      <div
+        class="sidebar-theme-item-color"
+        v-for="(editor, index) in item.style.editor"
+        :key="index"
+        :style="{ background: editor }"
+      ></div>
+    </div>
+    <div class="sidebar-theme-item-line">
+      <div
+        class="sidebar-theme-item-color"
+        v-for="(editor, index) in item.style.code"
+        :key="index"
+        :style="{ background: editor }"
+      ></div>
+    </div>
   </div>
 </template>
 <script>

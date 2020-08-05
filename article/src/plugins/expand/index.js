@@ -1,5 +1,6 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import Main from './index.vue'
+import './index.less'
 
 Main.install = function (Vue) {
   Vue.component(Main.name, Main)
