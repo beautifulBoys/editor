@@ -1,4 +1,12 @@
 {
+  "name": {
+    "zh":"炫酷黑",
+    "en":"Cool black"
+  },
+  "author": {
+    "zh": "官方",
+    "en":"officialk"
+  },
   "style": {
     "editor": [
       "#292B34",

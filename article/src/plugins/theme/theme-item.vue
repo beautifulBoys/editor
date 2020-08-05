@@ -1,20 +1,26 @@
 <template>
   <div class="sidebar-theme-item">
-    <div class="sidebar-theme-item-line">
-      <div
-        class="sidebar-theme-item-color"
-        v-for="(editor, index) in item.style.editor"
-        :key="index"
-        :style="{ background: editor }"
-      ></div>
-    </div>
-    <div class="sidebar-theme-item-line">
-      <div
-        class="sidebar-theme-item-color"
-        v-for="(editor, index) in item.style.code"
-        :key="index"
-        :style="{ background: editor }"
-      ></div>
+    <div class="sidebar-theme-item-box">
+      <div class="sidebar-theme-item-line">
+        <div
+          class="sidebar-theme-item-color"
+          v-for="(editor, index) in item.style.editor"
+          :key="index"
+          :style="{ background: editor }"
+        ></div>
+      </div>
+      <div class="sidebar-theme-item-line">
+        <div
+          class="sidebar-theme-item-color"
+          v-for="(editor, index) in item.style.code"
+          :key="index"
+          :style="{ background: editor }"
+        ></div>
+      </div>
+      <div class="sidebar-theme-item-auth">
+        <div class="sidebar-theme-item-name">{{item.name.zh}}</div>
+        <div class="sidebar-theme-item-author">{{item.author.zh}}</div>
+      </div>
     </div>
   </div>
 </template>

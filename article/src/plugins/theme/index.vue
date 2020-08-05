@@ -1,7 +1,7 @@
 <template>
   <div class="plugin-theme">
     <div class="file-title">主题</div>
-    <div class="block-content" :style="{height: windowInfo.sidebarHeight - 130 + 'px'}">
+    <div class="block-content" :style="{height: windowInfo.sidebarHeight - 40 + 'px'}">
       <theme-item
         v-for="(item, index) in list"
         :key="index"
@@ -28,7 +28,7 @@ export default {
   },
   data () {
     return {
-      list: [ThemeData]
+      list: [ThemeData, ThemeData, ThemeData, ThemeData, ThemeData]
     }
   },
   mounted () {
