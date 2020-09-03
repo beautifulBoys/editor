@@ -82,9 +82,7 @@ export default {
       window.onresize = (e) => {
         this.$store.commit('initWindowSize')
       }
-      document.oncontextmenu = (e) => {
-        return false
-      }
+      document.oncontextmenu = e => false
     },
     initEvent () {
       document.onkeydown = function (e) {

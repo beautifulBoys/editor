@@ -9,11 +9,11 @@
     </div>
     <div class="block-content" :style="{height: windowInfo.sidebarHeight - 70 + 'px'}">
       <menu-item
-        :item="item"
-        @event="menuEvent"
         v-for="(item, index) in list"
-        @contextmenu="contextmenuEvent"
         :key="index"
+        :item="item"
+        @contextmenu="contextmenuEvent"
+        @event="menuEvent"
       ></menu-item>
     </div>
   </div>
